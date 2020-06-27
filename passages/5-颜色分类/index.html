@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>75-颜色分类 - Virgil’s Blog</title><meta description="给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。 注意: 不能使用代码库中的排序函数来解决这道题。 例子 12输入: [2,0,2,1,1,0]输出: [0,0,1,1,2,2] 进阶  一个直观的解决方案是使用计数排序的两趟扫描算法。"><meta property="og:type" content="blog"><meta property="og:title" content="75-颜色分类"><meta property="og:url" content="http://virgilchen97.github.io/passages/5-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/"><meta property="og:site_name" content="Virgil’s Blog"><meta property="og:description" content="给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。 注意: 不能使用代码库中的排序函数来解决这道题。 例子 12输入: [2,0,2,1,1,0]输出: [0,0,1,1,2,2] 进阶  一个直观的解决方案是使用计数排序的两趟扫描算法。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://virgilchen97.github.io/img/og_image.png"><meta property="article:published_time" content="2019-08-26T22:11:56.000Z"><meta property="article:modified_time" content="2020-06-26T20:59:31.604Z"><meta property="article:author" content="VirgilChen"><meta property="article:tag" content="指针"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://virgilchen97.github.io/passages/5-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/"},"headline":"Virgil’s Blog","image":["http://virgilchen97.github.io/img/og_image.png"],"datePublished":"2019-08-26T22:11:56.000Z","dateModified":"2020-06-26T20:59:31.604Z","author":{"@type":"Person","name":"VirgilChen"},"description":"给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。\r 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。\r 注意: 不能使用代码库中的排序函数来解决这道题。\r 例子\r 12输入: [2,0,2,1,1,0]输出: [0,0,1,1,2,2]\r 进阶\r \r 一个直观的解决方案是使用计数排序的两趟扫描算法。"}</script><link rel="canonical" href="http://virgilchen97.github.io/passages/5-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/"><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="Virgil’s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2019-08-26T22:11:56.000Z" title="2019-08-26T22:11:56.000Z">2019-08-26</time><span class="level-item">3 分钟 读完 (大约 455 个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">75-颜色分类</h1><div class="content"><p>给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
+<p>此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。</p>
+<p><strong>注意:</strong><br> 不能使用代码库中的排序函数来解决这道题。</p>
+<p><strong>例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,0,2,1,1,0]</span><br><span class="line">输出: [0,0,1,1,2,2]</span><br></pre></td></tr></table></figure>
+<p><strong>进阶</strong></p>
+<ul>
+<li>一个直观的解决方案是使用计数排序的两趟扫描算法。首先，迭代计算出0、1 和 2 元素的个数，然后按照0、1、2的排序，重写当前数组。</li>
+<li>你能想出一个仅使用常数空间的一趟扫描算法吗？</li>
+</ul>
+<a id="more"></a>
+<h1 id="解法">解法</h1>
+<h2 id="三指针法">三指针法</h2>
+<p>设定一个左指针 <code>l</code> 指向左侧0的边界，设定一个右指针 <code>r</code> 指向右侧2的边界，在使用一个指针 <code>i</code> 对数组进行扫描, 如果 <code>nums[i] = 0</code> 则交换 <code>nums[i]</code> 和 <code>nums[l]</code>, 若 <code>nums[i] = 2</code> , 则交换 <code>nums[i]</code> 和 <code>nums[r]</code>。</p>
+<ul>
+<li>While <code>i &lt;= r</code> :
+<ul>
+<li>若 <code>nums[i] = 0</code> ：交换第 <code>i</code> 个和第 <code>l</code> 个元素，并将指针都向右移。
+<ul>
+<li>都向右移动的原因是此时 <code>i</code> 左侧的元素全部都被扫描过了，不需要再次扫描</li>
+</ul></li>
+<li>若 <code>nums[i] = 2</code> ：交换第 <code>i</code> 个和第 <code>r</code> 个元素，并将 <code>r</code> 指针左移 。
+<ul>
+<li>不移动 <code>i</code> 指针的原因是此时从右侧换来的元素是未知的，需要重新判断</li>
+</ul></li>
+<li>若 <code>nums[i] = 1</code> ：将指针 <code>i</code> 右移。</li>
+</ul></li>
+</ul>
+<h3 id="代码">代码</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> r = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[l];</span><br><span class="line">                nums[l++] = nums[i];</span><br><span class="line">                nums[i++] = temp;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i] == <span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[r];</span><br><span class="line">                nums[r--] = nums[i];</span><br><span class="line">                nums[i] = temp;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8C%87%E9%92%88/">指针</a></div><div class="addthis_inline_share_toolbox"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eebe43792e11671" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/passages/9-%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">89-格雷编码</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/passages/47-%E5%9B%9E%E6%97%8B%E9%95%96%E7%9A%84%E6%95%B0%E9%87%8F/"><span class="level-item">447-回旋镖的数量</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="Virgil’s Blog" height="28"></a><p class="size-small"><span>&copy; 2020 VirgilChen</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://VirgilChen97.github.io',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
